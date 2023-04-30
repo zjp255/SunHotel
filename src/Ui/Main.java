@@ -1,4 +1,4 @@
-package UIMain;
+package Ui;
 
 import DAO.DaoUtils;
 import DAO.SQLUtils;
@@ -12,6 +12,12 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        //new LogInFrame();
+        new MainFrame();
+    }
+
+    void test1()
+    {
         DaoUtils<RoomType> rtdu = new DaoUtils<>();
         RoomTypeUtitl rtu = new RoomTypeUtitl();
         RoomType rt = new RoomType(new BigDecimal(123),"LX008","特价双人房","2",150,200,"N",0);
@@ -34,4 +40,11 @@ public class Main {
         List<Pwd> list1 = pdu.Select(SQLUtils.selectSql(pu,new BigDecimal("1522730590000")),pu);
         System.out.println(list1.get(0).toString());
     }
+
+//    static void test2()
+//    {
+//        AllDao dao = new AllDao(new PwdUtitl());
+//        System.out.println(dao.getRows());
+//
+//    }
 }
