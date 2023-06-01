@@ -1,8 +1,10 @@
-package Ui;
+package Ui.Frame;
 
 import DAO.entity.Pwd;
 import DAO.entityDao.PwdDao;
 import DAO.entityUtitls.PwdUtitl;
+import Ui.MyDialog;
+import Ui.myImage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +36,7 @@ public class LogInFrame extends JFrame implements ActionListener {
         accountLabel.setFont(font);
         accountLabel.setBounds(30,180,40,30);
         panel.add(accountLabel);
-        accountField = new JTextField();
+        accountField = new JTextField("admin");
         accountField.setBounds(90,180,180,30);
         panel.add(accountField);
 
@@ -42,7 +44,7 @@ public class LogInFrame extends JFrame implements ActionListener {
         pwLabel.setFont(font);
         pwLabel.setBounds(30,225,40,30);
         panel.add(pwLabel);
-        pwField = new JPasswordField();
+        pwField = new JPasswordField("123456");
         pwField.setBounds(90,225,180,30);
         panel.add(pwField);
 
@@ -79,6 +81,8 @@ public class LogInFrame extends JFrame implements ActionListener {
                 int i = 0;
                 for ( ;i < list.size(); i++) {
                     if(account.equals(list.get(i).getUserid()) && password.equals(list.get(i).getPwd())) {
+                        new MainFrame(list.get(i));
+                        dispose();
                         new MyDialog(this, "登陆成功");
                         break;
                     }

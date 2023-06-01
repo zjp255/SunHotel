@@ -1,6 +1,8 @@
-package Ui;
+package Ui.Frame;
 
-import Ui.panel.TopButtonPanel;
+import DAO.entity.Pwd;
+import Ui.myImage;
+import Ui.panel.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,30 +13,44 @@ import java.awt.event.ComponentListener;
 public class MainFrame extends JFrame implements ComponentListener {
     int width,height;
     TopButtonPanel topButtonPanel;
-    JPanel leftPanel;
-    JPanel rightPanel;
-    JPanel bottomPanel;
-    JPanel infoPanel;
+    public static leftPanel leftPanel;
+    RightPanel rightPanel;
+    BottomPanel bottomPanel;
+    InfoPanel infoPanel;
+    Pwd userInfo;
+    static MainFrame instance;
 
-    public MainFrame()
+    public static MainFrame getInstance() {
+        return instance;
+    }
+
+    public  Pwd getPwd()
     {
+        return userInfo;
+    }
+
+    public MainFrame(Pwd pwd)
+    {
+        instance = this;
+        userInfo = pwd;
         setTitle("酒店管理系统");
-        setSize(1024,600);
+
         setMinimumSize(new Dimension(1136,700));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setIconImage(myImage.ImageMainFrameIcon());
         setLayout(null);
         topButtonPanel = new TopButtonPanel();
-        leftPanel = new JPanel();
-        rightPanel = new JPanel();
-        bottomPanel = new JPanel();
-        infoPanel = new JPanel();
+        leftPanel = new leftPanel();
+        rightPanel = new RightPanel();
+        bottomPanel = new BottomPanel();
+        infoPanel = new InfoPanel(userInfo.getUserid());
 
         initFrame();
         //setResizable(false);
         addComponentListener(this);
         setLocationRelativeTo(null);
         setVisible(true);
+        setSize(1024,600);
     }
 
     void initFrame()
@@ -52,16 +68,12 @@ public class MainFrame extends JFrame implements ComponentListener {
 
 
         leftPanel.setBounds(0,p1Height,p2Width,p2Height);
-        leftPanel.setBackground(new Color(101, 186, 62));
+
 
         rightPanel.setBounds(p2Width,p1Height,width - p2Width,p2Height);
-        rightPanel.setBackground( new Color(41, 70, 173));
 
         bottomPanel.setBounds(0,p1Height + p2Height,width,p3Height);
-        bottomPanel.setBackground(new Color(173, 11, 57));
-
         infoPanel.setBounds(0,p1Height + p2Height + p3Height,width,p4Height);
-        infoPanel.setBackground(new Color(173, 45, 201));
 
         add(bottomPanel);
         add(rightPanel);
@@ -97,6 +109,11 @@ public class MainFrame extends JFrame implements ComponentListener {
     public void componentResized(ComponentEvent e) {
         updateFrame();
         topButtonPanel.updateButs();
+        leftPanel.update();
+
+        bottomPanel.update();
+        infoPanel.update();
+        rightPanel.update();
     }
 
     @Override

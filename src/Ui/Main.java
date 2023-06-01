@@ -6,14 +6,19 @@ import DAO.entity.Pwd;
 import DAO.entity.RoomType;
 import DAO.entityUtitls.PwdUtitl;
 import DAO.entityUtitls.RoomTypeUtitl;
+import Ui.Frame.*;
 
+import javax.swing.*;
 import java.math.BigDecimal;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        //new LogInFrame();
-        new MainFrame();
+
+
+
+        new LogInFrame();
+
     }
 
     void test1()

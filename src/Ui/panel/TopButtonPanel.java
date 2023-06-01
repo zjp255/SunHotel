@@ -1,28 +1,32 @@
 package Ui.panel;
 
-import Ui.LogInFrame;
+import Ui.Frame.*;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
+
 
 public class TopButtonPanel extends JPanel implements ActionListener, ComponentListener {
+
+    static TopButtonPanel instance;
+
+    public static TopButtonPanel getInstance() {
+        return instance;
+    }
 
     JButton individualBillBut;//散户开单
     JButton groupBillBut;//团体开单
     JButton guestCheckoutBut;//客户结账
     JButton roomReservationBut;//客房预定
-    JButton businessInquiryBut;//客户管理
-    JButton netSettingBut;//网络设置
-    JButton sysSettingBut;//系统设置
+    JButton businessInquiryBut;//营业查询
+    JButton customerManagementBut;//客户管理
 
-    JFrame jFrame;
+
+    JFrame individualBillFrame,groupBillFrame,guestCheckoutFrame,roomReservationFrame,businessInquiryFrame,customerManagementFrame;
 
     public TopButtonPanel()
     {
@@ -32,15 +36,15 @@ public class TopButtonPanel extends JPanel implements ActionListener, ComponentL
         guestCheckoutBut = new JButton();
         roomReservationBut = new JButton();
         businessInquiryBut = new JButton();
-        netSettingBut = new JButton();
-        sysSettingBut = new JButton();
+        customerManagementBut = new JButton();
+
         add(groupBillBut);
         add(individualBillBut);
         add(guestCheckoutBut);
         add(roomReservationBut);
         add(businessInquiryBut);
-        add(netSettingBut);
-        add(sysSettingBut);
+        add(customerManagementBut);
+
         addComponentListener(this);
 
     }
@@ -50,10 +54,10 @@ public class TopButtonPanel extends JPanel implements ActionListener, ComponentL
         updateBut(individualBillBut,1);
         updateBut(groupBillBut,2);
         updateBut(guestCheckoutBut,3);
-        updateBut(roomReservationBut,4);
-        updateBut(businessInquiryBut,5);
-        updateBut(netSettingBut,6);
-        updateBut(sysSettingBut,7);
+        //updateBut(roomReservationBut,4);
+        updateBut(businessInquiryBut,4);
+        //updateBut(customerManagementBut,6);
+
     }
 
     void updateBut(JButton button,int no)
@@ -68,10 +72,10 @@ public class TopButtonPanel extends JPanel implements ActionListener, ComponentL
         initButton(individualBillBut,"Source/个人.png",1,"散客开单");
         initButton(groupBillBut,"Source/多人.png",2,"团体开单");
         initButton(guestCheckoutBut,"Source/结账.png",3,"客户结账");
-        initButton(roomReservationBut,"Source/预定.png",4,"客房预定");
-        initButton(businessInquiryBut,"Source/客户管理.png",5,"客户管理");
-        initButton(netSettingBut,"Source/网络设置.png",6,"网络设置");
-        initButton(sysSettingBut,"Source/系统设置.png",7,"系统设置");
+        //initButton(roomReservationBut,"Source/预定.png",4,"客房预定");
+        initButton(businessInquiryBut,"Source/营业执照.png",5,"营业查询");
+        //initButton(customerManagementBut,"Source/客户管理.png",6,"客户管理");
+
     }
     void initButton(JButton button,String path,int no,String butName)
     {
@@ -101,34 +105,45 @@ public class TopButtonPanel extends JPanel implements ActionListener, ComponentL
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == individualBillBut)
         {
-            if(jFrame == null)
+            if(individualBillFrame == null)
             {
-                jFrame = new LogInFrame();
+                individualBillFrame = new IndividualBillFrame(this);
             }
         }
         else if(e.getSource() == groupBillBut)
         {
-
+            if(groupBillFrame == null)
+            {
+                groupBillFrame = new groupBillFrame(this);
+            }
         }
         else if(e.getSource() == guestCheckoutBut)
         {
-
+            if(guestCheckoutFrame == null)
+            {
+                guestCheckoutFrame = new guestCheckoutFrame(this);
+            }
         }
         else if(e.getSource() == roomReservationBut)
         {
-
+            if(roomReservationFrame == null)
+            {
+                roomReservationFrame = new roomReservationFrame(this);
+            }
         }
         else if(e.getSource() == businessInquiryBut)
         {
-
+            if(businessInquiryFrame== null)
+            {
+                businessInquiryFrame = new businessInquiryFrame(this);
+            }
         }
-        else if(e.getSource() == netSettingBut)
+        else if(e.getSource() == customerManagementBut)
         {
-
-        }
-        else if(e.getSource() == sysSettingBut)
-        {
-
+            if(customerManagementFrame == null)
+            {
+               customerManagementFrame = new customerManagementFrame(this);
+            }
         }
 
     }
@@ -151,6 +166,54 @@ public class TopButtonPanel extends JPanel implements ActionListener, ComponentL
     @Override
     public void componentHidden(ComponentEvent e) {
 
+    }
+
+    public JFrame getIndividualBillFrame() {
+        return individualBillFrame;
+    }
+
+    public void setIndividualBillFrame(JFrame individualBillFrame) {
+        this.individualBillFrame = individualBillFrame;
+    }
+
+    public JFrame getGroupBillFrame() {
+        return groupBillFrame;
+    }
+
+    public void setGroupBillFrame(JFrame groupBillFrame) {
+        this.groupBillFrame = groupBillFrame;
+    }
+
+    public JFrame getGuestCheckoutFrame() {
+        return guestCheckoutFrame;
+    }
+
+    public void setGuestCheckoutFrame(JFrame guestCheckoutFrame) {
+        this.guestCheckoutFrame = guestCheckoutFrame;
+    }
+
+    public JFrame getRoomReservationFrame() {
+        return roomReservationFrame;
+    }
+
+    public void setRoomReservationFrame(JFrame roomReservationFrame) {
+        this.roomReservationFrame = roomReservationFrame;
+    }
+
+    public JFrame getBusinessInquiryFrame() {
+        return businessInquiryFrame;
+    }
+
+    public void setBusinessInquiryFrame(JFrame businessInquiryFrame) {
+        this.businessInquiryFrame = businessInquiryFrame;
+    }
+
+    public JFrame getCustomerManagementFrame() {
+        return customerManagementFrame;
+    }
+
+    public void setCustomerManagementFrame(JFrame customerManagementFrame) {
+        this.customerManagementFrame = customerManagementFrame;
     }
 }
 

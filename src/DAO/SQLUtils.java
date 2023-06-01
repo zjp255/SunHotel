@@ -63,4 +63,9 @@ public class SQLUtils {
         return sql.toString();
     }
 
+    public static String selectSqlUseCol(entityUtil eu,String colName,Object value)
+    {
+        StringBuilder sql = new StringBuilder("SELECT * FROM " + eu.getTableName() + " WHERE " + colName +" = \'" + value +"\'");
+        return  sql.toString();
+    }
 }

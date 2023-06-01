@@ -11,6 +11,7 @@ public interface entityUtil<T>{
     public int getColCount();
     public String[] getColName();
     public Object[] getObjects(T rt);
+    //public Object getObjectWithCol();
 
     public T getRowInfo(ResultSet rs);
 }
